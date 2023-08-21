@@ -1,17 +1,18 @@
-from hagman_list import hagman
-import random
+from hagman_list import hagman   # подключаем данные с картинками
+import random  # подключаем библиотеку для работы со случйным данными
 
-words = ['python', 'cat', 'program']
+words = ['python', 'cat', 'program'] # Создаем список слов из которых будет загадано слово
 
-abc=' '.join([chr(el) for el in range(ord('a'), ord('z')+1)])
+abc=' '.join([chr(el) for el in range(ord('a'), ord('z')+1)]) #создаем алфавит для игрока
 
-word = random.choice(words)
-letter_base = '*' * len(word)
-letter_used = []
-count_wrong = 0
-count_max_wrong = len(hagman) - 1
+word = random.choice(words) #выбираем слово из списка слов
+letter_base = '*' * len(word) # создаем строку символов по количеству букв в слове
+letter_used = [] # в переменной будем хранить использованные буквы
+count_wrong = 0 # ведем количество ошибок
+count_max_wrong = len(hagman) - 1 # максимальное количество ошибок которое может сделать игрок
 
 while count_wrong < count_max_wrong and letter_base != word:
+    ''' игровой цикл'''
     print(hagman[count_wrong])
     print('Использованные буквы:', ' '.join(letter_used))
     print('Алфавит:', abc)
@@ -19,7 +20,7 @@ while count_wrong < count_max_wrong and letter_base != word:
 
     letter_user = input('Введите букву:')
 
-    while letter_user in letter_used:
+    while letter_user in letter_used: # проверка ввода буквы игроком
         print('Error in letter')
         letter_user = input('Введите букву:')
     letter_used.append(letter_user)
@@ -36,6 +37,6 @@ while count_wrong < count_max_wrong and letter_base != word:
         count_wrong += 1
 if count_wrong == count_max_wrong:
     print(hagman[count_wrong])
-    print('Вы проиграли!!')
+    print('Вы проиграли!!','Слово было:', word)
 else:
     print('Вы победили!!!')
